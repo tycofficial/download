@@ -10,6 +10,7 @@ const stamp='2026-11-13T15:00:00Z';
 const epoch=Math.floor(Date.parse(stamp)/1000);
 const scriptsDir='installer/scripts';
 const outPath='output/Clash-Verge-Codex-Monterey-Intel.pkg';
+fs.mkdirSync('build',{recursive:true});
 const sourceFiles=fs.readdirSync(scriptsDir).sort().map(name=>({name,path:path.join(scriptsDir,name),size:fs.statSync(path.join(scriptsDir,name)).size}));
 const oct=(n,width)=>{const s=n.toString(8);if(s.length>width)throw Error('CPIO field overflow');return s.padStart(width,'0');};
 const header=(name,size,mode,inode)=>Buffer.from('070707'+oct(0,6)+oct(inode,6)+oct(mode,6)+oct(0,6)+oct(0,6)+oct(1,6)+oct(0,6)+oct(epoch,11)+oct(Buffer.byteLength(name)+1,6)+oct(size,11));
