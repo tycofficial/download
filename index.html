@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Monterey 双应用安装包 · TYC</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:#172235;font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}main{max-width:740px;margin:8vh auto;padding:36px;background:white;border:1px solid #dce3eb;border-radius:20px;box-shadow:0 14px 50px #17223509}.label{color:#64748b;font-size:13px;letter-spacing:.12em}h1{font-size:clamp(28px,5vw,38px);line-height:1.3;margin:12px 0}p{margin:14px 0}.apps{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0}.apps span{padding:8px 13px;border:1px solid #dce3eb;border-radius:9px;background:#f9fafb}.button{display:inline-block;background:#175bd4;color:white;text-decoration:none;border-radius:10px;padding:13px 22px;font-weight:650;margin:5px 0}.button:hover{background:#1249ad}.small{font-size:13px;color:#64748b}.status{padding:12px 14px;background:#eef4ff;border-radius:9px;margin-top:20px}details{margin-top:25px;border-top:1px solid #e2e8f0;padding-top:18px}summary{cursor:pointer}code{display:block;overflow-wrap:anywhere;font:12px/1.7 ui-monospace,monospace;background:#f4f6f8;padding:12px;border-radius:8px}a{color:#175bd4}footer{margin-top:28px;font-size:12px;color:#64748b}@media(max-width:780px){main{margin:22px 14px;padding:26px 22px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="label">TYC · DOWNLOAD</div>
+  <h1>Monterey 双应用安装包</h1>
+  <p>为 Intel Mac 与 macOS Monterey 12.7.6 准备。一个文件，安装两个桌面应用。</p>
+  <div class="apps"><span>Clash Verge Rev <b>2.5.10</b></span><span>Codex 桌面版 <b>26.623.141536</b></span></div>
+  <a class="button" id="download" href="https://github.com/tycofficial/download/releases/download/monterey-intel-2026-11-13/Clash-Verge-Codex-Monterey-Intel.pkg">下载安装包 · 592 MB</a>
+  <p class="small">两个程序均已内置。下载后在 Mac 双击安装，至少留出 4 GB 空间。</p>
+  <p class="status" id="status" role="status" aria-live="polite">正在检查下载文件，准备自动开始下载……</p>
+  <details>
+    <summary>安装说明与文件校验</summary>
+    <p>Clash Verge 可导入你自己的订阅。Codex 是旧版桌面图形应用，安装后需登录；部分电脑控制等附加功能需要更高系统。</p>
+    <p>合并安装包未作 Apple Developer ID Installer 签名。若首次被系统拦截，请在 Finder 按住 Control 点按文件并选择“打开”，或在“安全性与隐私 → 通用”确认打开。</p>
+    <p>已校验原始文件、Intel 架构和主程序系统要求，尚未在目标 Mac 上实机测试。不能保证旧版在线服务和所有附加功能可用。</p>
+    <p>文件大小：592,463,796 字节。SHA256：</p>
+    <code>43d738f35254cb97612e6f88468be4b710e66b377a327ff0e09f7b60225cd2b5</code>
+    <p><a href="https://github.com/tycofficial/download/releases/tag/monterey-intel-2026-11-13">查看发布记录</a> · <a href="https://github.com/tycofficial/download">查看仓库与安装脚本</a></p>
+  </details>
+  <footer>本合并安装包与 OpenAI、Clash Verge Rev 无隶属关系。程序保持原始文件，来源与许可证随包提供。</footer>
+</main>
+<script>
+(function(){
+  var status=document.getElementById('status');
+  var button=document.getElementById('download');
+  var attempts=0;
+  function check(){
+    attempts++;
+    fetch('https://api.github.com/repos/tycofficial/download/releases/tags/monterey-intel-2026-11-13',{cache:'no-store'})
+      .then(function(response){if(!response.ok)throw new Error('Not ready');return response.json();})
+      .then(function(release){
+        var asset=(release.assets||[]).find(function(item){return item.name==='Clash-Verge-Codex-Monterey-Intel.pkg'&&item.state==='uploaded'&&item.size===592463796;});
+        if(!asset)throw new Error('Not ready');
+        button.href=asset.browser_download_url;
+        status.textContent='文件已就绪，下载即将开始。若浏览器没有自动下载，请点击上方按钮。';
+        window.setTimeout(function(){window.location.assign(asset.browser_download_url);},700);
+      })
+      .catch(function(){
+        status.textContent='下载文件正在发布或网络暂时不可达。页面会自动重试，也可点击“查看发布记录”。';
+        if(attempts<40)window.setTimeout(check,15000);
+      });
+  }
+  check();
+})();
+</script>
+</body>
+</html>

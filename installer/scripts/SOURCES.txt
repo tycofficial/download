@@ -1,0 +1,28 @@
+Personal combined installer for Intel macOS Monterey 12.7.6.
+This installer is not an official product of OpenAI or Clash Verge Rev.
+
+Codex: official desktop GUI, 26.623.141536, Intel x64
+https://persistent.oaistatic.com/codex-app-prod/Codex-darwin-x64-26.623.141536.zip
+Original ZIP SHA256: 5a8eb9bca0c021b994e56c93ef3502bdbc105975bcb83f99aef40f2ae56d48cc
+The original, unmodified ZIP is embedded as Codex.zip.
+Metadata reference: https://github.com/Homebrew/homebrew-cask/blob/main/Casks/c/codex-app.rb
+Official documentation: https://learn.chatgpt.com/docs/app
+
+Clash Verge Rev: 2.5.10, Intel x64
+https://github.com/clash-verge-rev/clash-verge-rev/releases/tag/v2.5.10
+https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.10/Clash.Verge_2.5.10_x64.app.tar.gz
+Original TAR.GZ SHA256: 5d72465f401e78e9b6238cf9ce8a32dfdd16d7d7c3389d1584085a4d2835e59e
+The original, unmodified TAR.GZ is embedded as ClashVerge.tar.gz.
+Source snapshot: verge-source-v2.5.10.tar.gz
+License: verge-LICENSE (GNU GPL version 3)
+Dependencies and build instructions are recorded in the source snapshot.
+Mihomo core source: https://github.com/MetaCubeX/mihomo
+
+The packaging scripts were created for this request; they verify the original
+archives, extract on the target Mac, verify code signatures, back up existing
+apps, and install both apps together. No proxy subscription or account login
+is bundled. No security checks are disabled.
+
+Validation: checksums, ZIP/TAR structures, native binary architecture and OS
+load commands, installer metadata and script syntax. No macOS host was available
+to test GUI launch, login, network service availability or optional features.

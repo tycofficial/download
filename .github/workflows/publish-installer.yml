@@ -1,0 +1,75 @@
+name: Publish Monterey installer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-installer.yml'
+      - 'installer/**'
+      - 'tools/build-offline-pkg.mjs'
+      - 'tools/verify-offline-pkg.mjs'
+      - 'publish/**'
+      - '.gitattributes'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monterey-installer-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24.17.0'
+
+      - name: Download and verify original archives
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $manifest = Get-Content -LiteralPath 'publish/manifest.json' -Raw | ConvertFrom-Json
+          foreach ($item in $manifest.downloads) {
+            $destination = Join-Path 'installer/scripts' $item.file
+            curl.exe --fail --location --retry 5 --retry-delay 2 --connect-timeout 30 --max-time 900 --output $destination $item.url
+            if ($LASTEXITCODE -ne 0) { throw "Download failed: $($item.file)" }
+            $actual = (Get-FileHash -LiteralPath $destination -Algorithm SHA256).Hash.ToLowerInvariant()
+            if ($actual -ne $item.sha256) { throw "Checksum mismatch: $($item.file)" }
+          }
+
+      - name: Build and independently verify package contents
+        run: |
+          $ErrorActionPreference = 'Stop'
+          node tools/build-offline-pkg.mjs
+          if ($LASTEXITCODE -ne 0) { throw 'Package build failed' }
+          node tools/verify-offline-pkg.mjs
+          if ($LASTEXITCODE -ne 0) { throw 'Package verification failed' }
+          $manifest = Get-Content -LiteralPath 'publish/manifest.json' -Raw | ConvertFrom-Json
+          $file = Join-Path 'output' $manifest.package
+          $actual = (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actual -ne $manifest.package_sha256) { throw 'Built package differs from the original verified installer' }
+          if ((Get-Item -LiteralPath $file).Length -ne $manifest.package_bytes) { throw 'Unexpected installer size' }
+          [IO.File]::WriteAllText((Join-Path $PWD 'build/SHA256SUMS.txt'), "$actual  $($manifest.package)`n")
+
+      - name: Publish the installer to GitHub Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $manifest = Get-Content -LiteralPath 'publish/manifest.json' -Raw | ConvertFrom-Json
+          $tag = $manifest.tag
+          gh release view $tag --repo $env:GITHUB_REPOSITORY --json tagName
+          if ($LASTEXITCODE -ne 0) {
+            gh release create $tag --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title 'Clash Verge + Codex · Monterey Intel' --notes-file 'publish/release-notes.md' --latest
+            if ($LASTEXITCODE -ne 0) { throw 'Release creation failed' }
+          }
+          gh release upload $tag (Join-Path 'output' $manifest.package) 'build/SHA256SUMS.txt' --repo $env:GITHUB_REPOSITORY --clobber
+          if ($LASTEXITCODE -ne 0) { throw 'Release asset upload failed' }
+          "Installer published: https://github.com/$env:GITHUB_REPOSITORY/releases/download/$tag/$($manifest.package)" >> $env:GITHUB_STEP_SUMMARY

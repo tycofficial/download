@@ -1,0 +1,89 @@
+#!/bin/bash
+set -eu
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin
+
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+stage=''
+backup=''
+complete=0
+codex_added=0
+verge_added=0
+codex_saved=0
+verge_saved=0
+
+cleanup() {
+    result=$?
+    trap - EXIT HUP INT TERM
+    if [ "$complete" -ne 1 ]; then
+        if [ "$codex_added" -eq 1 ]; then rm -rf -- '/Applications/Codex.app'; fi
+        if [ "$verge_added" -eq 1 ]; then rm -rf -- '/Applications/Clash Verge.app'; fi
+        if [ "$codex_saved" -eq 1 ]; then mv -- "$backup/Codex.app" '/Applications/Codex.app' || true; fi
+        if [ "$verge_saved" -eq 1 ]; then mv -- "$backup/Clash Verge.app" '/Applications/Clash Verge.app' || true; fi
+    fi
+    case "$stage" in
+        /Applications/.ClashCodexSetup.*) rm -rf -- "$stage" ;;
+    esac
+    exit "$result"
+}
+trap cleanup EXIT
+trap 'exit 1' HUP INT TERM
+
+cd "$script_dir"
+printf '%s\n' '正在检查两个内置安装文件……'
+shasum -a 256 -c SHA256SUMS
+stage=$(mktemp -d '/Applications/.ClashCodexSetup.XXXXXXXX')
+chmod 700 "$stage"
+
+printf '%s\n' '正在解包 Codex 桌面版……'
+ditto -x -k Codex.zip "$stage"
+printf '%s\n' '正在解包 Clash Verge……'
+tar -xzf ClashVerge.tar.gz -C "$stage"
+
+check_app() {
+    local app_path="$1" expected_id="$2" executable="$3"
+    local actual_id
+    actual_id=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app_path/Contents/Info.plist")
+    [ "$actual_id" = "$expected_id" ] || return 1
+    [ -x "$app_path/Contents/MacOS/$executable" ] || return 1
+    file -b "$app_path/Contents/MacOS/$executable" | grep -q x86_64
+    codesign --verify --strict "$app_path"
+}
+check_app "$stage/Codex.app" 'com.openai.codex' Codex
+check_app "$stage/Clash Verge.app" 'io.github.clash-verge-rev.clash-verge-rev' clash-verge
+
+chown -R root:wheel "$stage/Codex.app" "$stage/Clash Verge.app"
+chmod 755 "$stage/Codex.app" "$stage/Clash Verge.app"
+
+if [ -e '/Applications/Codex.app' ] || [ -L '/Applications/Codex.app' ] ||
+   [ -e '/Applications/Clash Verge.app' ] || [ -L '/Applications/Clash Verge.app' ]; then
+    backup="/Applications/Clash-Codex-Backup-$(date +%Y%m%d-%H%M%S)-$$"
+    mkdir -m 755 "$backup"
+fi
+if [ -e '/Applications/Codex.app' ] || [ -L '/Applications/Codex.app' ]; then
+    mv -- '/Applications/Codex.app' "$backup/Codex.app"
+    codex_saved=1
+fi
+if [ -e '/Applications/Clash Verge.app' ] || [ -L '/Applications/Clash Verge.app' ]; then
+    mv -- '/Applications/Clash Verge.app' "$backup/Clash Verge.app"
+    verge_saved=1
+fi
+printf '%s\n' '正在安装两个应用程序……'
+mv -- "$stage/Codex.app" '/Applications/Codex.app'
+codex_added=1
+mv -- "$stage/Clash Verge.app" '/Applications/Clash Verge.app'
+verge_added=1
+complete=1
+
+console_user=$(stat -f '%Su' /dev/console)
+if [ "$console_user" != root ] && [ "$console_user" != loginwindow ] && id "$console_user" >/dev/null 2>&1; then
+    console_uid=$(id -u "$console_user")
+    # Keep the verified legacy desktop version on Monterey. The current
+    # updater feed includes old packages whose declared and binary OS minima differ.
+    if [ "$(sw_vers -productVersion | cut -d. -f1)" -eq 12 ]; then
+        sudo -u "$console_user" defaults write com.openai.codex SUAutomaticallyUpdate -bool false || true
+        sudo -u "$console_user" defaults write com.openai.codex SUEnableAutomaticChecks -bool false || true
+    fi
+    launchctl asuser "$console_uid" sudo -u "$console_user" open '/Applications/Clash Verge.app' '/Applications/Codex.app' || true
+fi
+printf '%s\n' '安装完成。请导入自己的 Clash 订阅，并登录 Codex。'
+exit 0

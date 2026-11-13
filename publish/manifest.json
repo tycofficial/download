@@ -1,0 +1,28 @@
+{
+  "tag": "monterey-intel-2026-11-13",
+  "package": "Clash-Verge-Codex-Monterey-Intel.pkg",
+  "package_sha256": "43d738f35254cb97612e6f88468be4b710e66b377a327ff0e09f7b60225cd2b5",
+  "package_bytes": 592463796,
+  "downloads": [
+    {
+      "file": "Codex.zip",
+      "url": "https://persistent.oaistatic.com/codex-app-prod/Codex-darwin-x64-26.623.141536.zip",
+      "sha256": "5a8eb9bca0c021b994e56c93ef3502bdbc105975bcb83f99aef40f2ae56d48cc"
+    },
+    {
+      "file": "ClashVerge.tar.gz",
+      "url": "https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.10/Clash.Verge_2.5.10_x64.app.tar.gz",
+      "sha256": "5d72465f401e78e9b6238cf9ce8a32dfdd16d7d7c3389d1584085a4d2835e59e"
+    },
+    {
+      "file": "verge-source-v2.5.10.tar.gz",
+      "url": "https://codeload.github.com/clash-verge-rev/clash-verge-rev/tar.gz/refs/tags/v2.5.10",
+      "sha256": "4a9952abd443548ba0ba1de0acd2aedfed0ed0f9c71f7da43f3c0603acb28bba"
+    },
+    {
+      "file": "verge-LICENSE",
+      "url": "https://raw.githubusercontent.com/clash-verge-rev/clash-verge-rev/v2.5.10/LICENSE",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    }
+  ]
+}

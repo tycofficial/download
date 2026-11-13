@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<installer-gui-script minSpecVersion="2">
+  <title>Clash Verge 与 Codex · Monterey Intel 安装包</title>
+  <options customize="never" require-scripts="false" hostArchitectures="x86_64"/>
+  <domains enable_localSystem="true" enable_currentUserHome="false" enable_anywhere="false"/>
+  <volume-check script="true"><allowed-os-versions><os-version min="12.0"/></allowed-os-versions></volume-check>
+  <welcome file="welcome.html" mime-type="text/html"/>
+  <readme file="readme.html" mime-type="text/html"/>
+  <conclusion file="conclusion.html" mime-type="text/html"/>
+  <choices-outline><line choice="suite"/></choices-outline>
+  <choice id="suite" title="Clash Verge 与 Codex" visible="false" start_selected="true">
+    <pkg-ref id="local.macsetup.clash-codex.monterey"/>
+  </choice>
+  <pkg-ref id="local.macsetup.clash-codex.monterey" version="1.0" installKBytes="1600000" onConclusion="None">#ClashCodex.component.pkg</pkg-ref>
+  <pkg-ref id="local.macsetup.clash-codex.monterey">
+    <must-close>
+      <app id="com.openai.codex"/>
+      <app id="io.github.clash-verge-rev.clash-verge-rev"/>
+    </must-close>
+  </pkg-ref>
+</installer-gui-script>
