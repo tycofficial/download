@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>原版 Mac 安装文件 · TYC</title>
+  <title>Clash 下载与 Codex 系统要求 · TYC</title>
   <style>
     *{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:#172235;font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}main{max-width:850px;margin:6vh auto;padding:36px;background:white;border:1px solid #dce3eb;border-radius:20px;box-shadow:0 14px 50px #17223509}.label{color:#64748b;font-size:13px;letter-spacing:.12em}h1{font-size:clamp(28px,5vw,38px);line-height:1.3;margin:12px 0}h2{font-size:22px;margin:0}p{margin:12px 0}.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}article{border:1px solid #dce3eb;border-radius:13px;padding:23px;background:#fbfcfe}.tag{font-size:12px;color:#52667f}.button{display:block;text-align:center;background:#175bd4;color:white;text-decoration:none;border-radius:9px;padding:12px;font-weight:650;margin:18px 0 12px}.button:hover{background:#1249ad}.small{font-size:13px;color:#64748b}.note{padding:15px 18px;background:#eef4ff;border-radius:10px;margin:24px 0}details{margin-top:24px;border-top:1px solid #e2e8f0;padding-top:18px}summary{cursor:pointer}code{display:block;overflow-wrap:anywhere;font:11px/1.7 ui-monospace,monospace;background:#f1f4f8;padding:10px;border-radius:7px}a{color:#175bd4}footer{margin-top:28px;font-size:12px;color:#64748b}@media(max-width:700px){main{margin:20px 13px;padding:26px 20px}.cards{grid-template-columns:1fr}}
   </style>
@@ -11,8 +11,8 @@
 <body>
 <main>
   <div class="label">TYC · DOWNLOAD</div>
-  <h1>两个原版文件，分别安装</h1>
-  <p>Intel Mac · macOS Monterey 12.7.6。保留原发布方的文件，分别点击下面的下载按钮。</p>
+  <h1>Clash 下载与新版 Codex</h1>
+  <p>Intel Mac 下载入口。请先核对 Codex 的系统要求：当前新版桌面应用需要 macOS 13，Monterey 12.7.6 不满足要求。</p>
   <div class="cards">
     <article>
       <div class="tag">CLASH · 原版 DMG</div>
@@ -22,24 +22,24 @@
       <p class="small">打开 DMG，把 Clash Verge 拖到 Applications（应用程序），然后打开并导入自己的订阅。</p>
     </article>
     <article>
-      <div class="tag">CODEX · 官方原版 ZIP</div>
-      <h2>Codex 桌面图形版</h2>
-      <p class="small">26.623.141536 · Intel x64 · 494.5 MB</p>
-      <a class="button" id="codex-download" href="https://github.com/tycofficial/download/releases/download/original-installers-monterey-intel-2026-11-14/Codex-darwin-x64-26.623.141536.zip">下载 Codex 原版</a>
-      <p class="small">双击 ZIP 解压，把 Codex.app 拖到 Applications（应用程序），然后打开并登录。</p>
+      <div class="tag">CODEX · 新版桌面体验</div>
+      <h2>新版 Codex</h2>
+      <p class="small">26.1111.21308 · Intel x64 · 最低 macOS 13.0</p>
+      <p><b>macOS 12.7.6 请勿安装此版本。</b>旧版 26.623.141536 已停止推荐：已有模型与用量不可用反馈，签名通过不等于在线功能可用。</p>
+      <a class="button" id="codex-download" href="https://persistent.oaistatic.com/codex-app-prod/ChatGPT-darwin-x64-26.1111.21308.zip">下载新版桌面应用（仅 macOS 13+）</a>
+      <a class="button" id="codex-web" href="https://chatgpt.com/codex">打开官方 Codex 网页版</a>
+      <p class="small">新版 Codex 已包含在 ChatGPT 桌面应用中。网页版是浏览器图形界面，与本地桌面工作方式不同；模型是否可用取决于账号套餐、权限与网络。</p>
     </article>
   </div>
-  <div class="note">两个原始应用已通过开发者签名、苹果公证与 Gatekeeper 检查（Intel macOS 15.7.9）。文件未重新封装或重新签名，旧合并包已停止自动下载。</div>
+  <div class="note">旧 Codex 下载推荐和旧合并包自动下载均已撤下。保留 macOS 12 时不能把当前新版桌面应用当作兼容安装包；若需要本地新版桌面体验，须先核对设备能否运行受支持的系统。</div>
   <details>
     <summary>首次打开、旧系统说明与校验</summary>
-    <p>验证结果：Clash Verge 的签名发布者为 won fen；Codex 为 OpenAI OpCo, LLC。两者均显示 accepted / Notarized Developer ID。<a href="https://github.com/tycofficial/download/releases/download/original-installers-monterey-intel-2026-11-14/Developer-Signature-Verification.txt">查看完整签名验证记录</a>。检查环境为 Intel macOS 15.7.9，并非在你的 Monterey Mac 上实机启动。</p>
+    <p>Clash Verge 原始应用已在 Intel macOS 15.7.9 通过签名与 Gatekeeper 检查，签名发布者为 won fen。旧 Codex 当时也通过了签名检查，但没有验证模型、用量和在线业务；现已停止推荐。<a href="https://github.com/tycofficial/download/releases/download/original-installers-monterey-intel-2026-11-14/Developer-Signature-Verification.txt">历史签名记录（不代表在线功能可用）</a>。</p>
     <p>原版应用首次打开时，macOS 仍可能询问是否打开从互联网下载的应用。开发者身份和公证状态以系统实际验证结果为准，原版文件不等于绝对不会弹出提示。</p>
     <p>如果仍提示“身份不明开发者”或“无法验证开发者”，请先查看 <a href="https://support.apple.com/zh-cn/102445">Apple 官方说明</a>，核对来源与文件完整性。不要关闭整个系统的安全检查。若提示“将损坏你的电脑”或“已损坏”，请停止打开并核实具体信息。</p>
-    <p>Codex 保留适配旧系统的桌面版本；电脑操作等附加功能可能需要更高系统。尚未在你的 Monterey Mac 上实机验证，也不能保证旧版在线服务一直可用。</p>
+    <p>2026-11-14 核对：当前 Intel 桌面版 26.1111.21308 的官方更新清单、应用声明和主程序构建最低系统版本均为 macOS 13.0。GPT-6.1 已在当前产品中提供，部分旧模型已退役；请以账号实际模型列表为准。<a href="https://learn.chatgpt.com/docs/models">OpenAI 官方模型文档</a> · <a href="https://learn.chatgpt.com/docs/app">官方桌面应用说明</a>。</p>
     <p>Clash 原版文件 SHA256：</p>
     <code>b1d6938680f3e411b5961e56591faaa92c95e9676f54ebfdfa98b7eab374023e</code>
-    <p>Codex 原版文件 SHA256：</p>
-    <code>5a8eb9bca0c021b994e56c93ef3502bdbc105975bcb83f99aef40f2ae56d48cc</code>
     <p><a href="https://github.com/clash-verge-rev/clash-verge-rev/releases/tag/v2.5.10">Clash 原发布页</a> · <a href="https://github.com/tycofficial/download">本站仓库</a></p>
   </details>
   <footer>本站仅提供下载入口与文件镜像，与 OpenAI、Clash Verge Rev 无隶属关系。</footer>

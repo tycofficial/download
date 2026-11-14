@@ -1,0 +1,23 @@
+name: Correct old Codex download notice
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-codex-notice.yml'
+      - 'publish/codex-compatibility-notice.md'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update-notice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Mark obsolete Codex as archived
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release edit original-installers-monterey-intel-2026-11-14 \
+            --repo "$GITHUB_REPOSITORY" --latest=false \
+            --title 'Clash 原版与旧 Codex 存档（旧 Codex 不再推荐）' \
+            --notes-file publish/codex-compatibility-notice.md

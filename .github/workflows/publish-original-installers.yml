@@ -1,13 +1,6 @@
 name: Publish original Mac installers
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/publish-original-installers.yml'
-      - 'tools/verify-originals-macos.sh'
-      - 'publish/original-manifest.json'
-      - 'publish/original-release-notes.md'
   workflow_dispatch:
 
 permissions:

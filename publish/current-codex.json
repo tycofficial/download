@@ -1,0 +1,15 @@
+{
+  "checked_date": "2026-11-14",
+  "user_system": "macOS Monterey 12.7.6, Intel",
+  "desktop_version": "26.1111.21308",
+  "architecture": "x86_64",
+  "minimum_macos": "13.0",
+  "download_url": "https://persistent.oaistatic.com/codex-app-prod/ChatGPT-darwin-x64-26.1111.21308.zip",
+  "bytes": 863519521,
+  "appcast_url": "https://persistent.oaistatic.com/codex-app-prod/appcast-x64.xml",
+  "verified_fields": ["appcast minimumSystemVersion", "Info.plist LSMinimumSystemVersion", "main Mach-O LC_BUILD_VERSION"],
+  "older_version_no_longer_recommended": "26.623.141536",
+  "reason": "User reports model requests and usage display do not work. Signing and minimum-OS metadata did not establish current online service compatibility.",
+  "official_models_documentation": "https://learn.chatgpt.com/docs/models",
+  "web_url": "https://chatgpt.com/codex"
+}

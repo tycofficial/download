@@ -1,15 +1,19 @@
-# Monterey Intel 原版独立安装文件
+# Clash 下载与 Codex 系统兼容性
 
-下载页：**https://tycofficial.github.io/download/**
+页面：https://tycofficial.github.io/download/
 
-当前页面提供两个独立下载按钮，停止自动下载旧合并包。文件来自原发布方，不重新封装或重新签名。大文件存放在 GitHub Releases，Pages 提供下载入口。
+Clash Verge Rev 2.5.10 的原版 Intel DMG 保留。
 
-Clash Verge Rev 2.5.10 使用原版 Intel DMG；Codex 26.623.141536 使用 OpenAI 原版 Intel ZIP，仍为桌面图形应用。分别打开并将 app 拖入 Applications。首次打开可能需要 macOS 安全确认。
+**Codex 26.623.141536 已停止推荐。** 用户反馈模型请求和用量加载均不可用。之前核验签名和最低系统版本，未验证当下的在线功能，不应将该版本作为当前可用解决方案。
 
-Codex 主程序与桌面核心框架按 macOS 12 构建；部分电脑控制等附加组件要求更高系统。未在目标 Mac 上实机验证，也未验证旧版的在线服务和登录可用性。下载原版文件不会修改你的系统偏好或自动更新设置；更新前请核对系统要求。
+2026-11-14 重新核对，官方当前 Intel 桌面应用 26.1111.21308 的官方更新清单、Info.plist 与主程序 Mach-O 最低系统要求均为 **macOS 13.0**。用户的 Monterey 12.7.6 不满足该要求。新版已包含在 ChatGPT 桌面应用中，主页提供对应的 Intel 原始文件链接，并明确标注系统门槛。
 
-`Publish original Mac installers` 工作流在 Intel macOS 15 环境中下载原文件、核对 SHA256、检查 Developer ID、代码签名和 Gatekeeper，通过后发布未修改的原文件及验证记录。
+官方模型文档说明 GPT-6.1 已提供，部分旧模型已经退役。可用性依赖账号套餐、工作区和客户端；用量加载失败也可能与网络或登录有关，不据此单独断定原因。
 
-原文件 SHA256 记录在 `publish/original-manifest.json` 和新 Release 的 `SHA256SUMS.txt`。
+官方模型文档：https://learn.chatgpt.com/docs/models
 
-旧合并包因没有 Apple Developer ID Installer 签名而被替换。保留旧版记录，但不再自动构建或从主页下载。本仓库不代表 OpenAI 或 Clash Verge Rev 官方发行。
+官方桌面应用说明：https://learn.chatgpt.com/docs/app
+
+网页图形界面：https://chatgpt.com/codex 。该网页不是本地桌面应用，也不等于完全相同的本地项目工作流。
+
+历史原版文件和签名报告留作存档。历史报告不代表当前模型、用量或在线服务已测试通过。旧合并包和旧原版流程均不再自动发布。
