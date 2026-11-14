@@ -3,39 +3,45 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
-  <title>Monterey 双应用安装包 · TYC</title>
+  <title>原版 Mac 安装文件 · TYC</title>
   <style>
-    *{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:#172235;font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}main{max-width:740px;margin:8vh auto;padding:36px;background:white;border:1px solid #dce3eb;border-radius:20px;box-shadow:0 14px 50px #17223509}.label{color:#64748b;font-size:13px;letter-spacing:.12em}h1{font-size:clamp(28px,5vw,38px);line-height:1.3;margin:12px 0}p{margin:14px 0}.apps{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0}.apps span{padding:8px 13px;border:1px solid #dce3eb;border-radius:9px;background:#f9fafb}.button{display:inline-block;background:#175bd4;color:white;text-decoration:none;border-radius:10px;padding:13px 22px;font-weight:650;margin:5px 0}.button:hover{background:#1249ad}.small{font-size:13px;color:#64748b}.status{padding:12px 14px;background:#eef4ff;border-radius:9px;margin-top:20px}details{margin-top:25px;border-top:1px solid #e2e8f0;padding-top:18px}summary{cursor:pointer}code{display:block;overflow-wrap:anywhere;font:12px/1.7 ui-monospace,monospace;background:#f4f6f8;padding:12px;border-radius:8px}a{color:#175bd4}footer{margin-top:28px;font-size:12px;color:#64748b}@media(max-width:780px){main{margin:22px 14px;padding:26px 22px}}
+    *{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:#172235;font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}main{max-width:850px;margin:6vh auto;padding:36px;background:white;border:1px solid #dce3eb;border-radius:20px;box-shadow:0 14px 50px #17223509}.label{color:#64748b;font-size:13px;letter-spacing:.12em}h1{font-size:clamp(28px,5vw,38px);line-height:1.3;margin:12px 0}h2{font-size:22px;margin:0}p{margin:12px 0}.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}article{border:1px solid #dce3eb;border-radius:13px;padding:23px;background:#fbfcfe}.tag{font-size:12px;color:#52667f}.button{display:block;text-align:center;background:#175bd4;color:white;text-decoration:none;border-radius:9px;padding:12px;font-weight:650;margin:18px 0 12px}.button:hover{background:#1249ad}.small{font-size:13px;color:#64748b}.note{padding:15px 18px;background:#eef4ff;border-radius:10px;margin:24px 0}details{margin-top:24px;border-top:1px solid #e2e8f0;padding-top:18px}summary{cursor:pointer}code{display:block;overflow-wrap:anywhere;font:11px/1.7 ui-monospace,monospace;background:#f1f4f8;padding:10px;border-radius:7px}a{color:#175bd4}footer{margin-top:28px;font-size:12px;color:#64748b}@media(max-width:700px){main{margin:20px 13px;padding:26px 20px}.cards{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 <main>
   <div class="label">TYC · DOWNLOAD</div>
-  <h1>Monterey 双应用安装包</h1>
-  <p>为 Intel Mac 与 macOS Monterey 12.7.6 准备。一个文件，安装两个桌面应用。</p>
-  <div class="apps"><span>Clash Verge Rev <b>2.5.10</b></span><span>Codex 桌面版 <b>26.623.141536</b></span></div>
-  <a class="button" id="download" href="https://github.com/tycofficial/download/releases/download/monterey-intel-2026-11-13/Clash-Verge-Codex-Monterey-Intel.pkg">下载安装包 · 592 MB</a>
-  <p class="small">两个程序均已内置。下载后在 Mac 双击安装，至少留出 4 GB 空间。</p>
-  <p class="status" id="status" role="status" aria-live="polite">安装包已发布，准备自动开始下载……</p>
+  <h1>两个原版文件，分别安装</h1>
+  <p>Intel Mac · macOS Monterey 12.7.6。保留原发布方的文件，分别点击下面的下载按钮。</p>
+  <div class="cards">
+    <article>
+      <div class="tag">CLASH · 原版 DMG</div>
+      <h2>Clash Verge Rev</h2>
+      <p class="small">2.5.10 · Intel x64 · 86.5 MB</p>
+      <a class="button" id="clash-download" href="https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.10/Clash.Verge_2.5.10_x64.dmg">下载 Clash 原版</a>
+      <p class="small">打开 DMG，把 Clash Verge 拖到 Applications（应用程序），然后打开并导入自己的订阅。</p>
+    </article>
+    <article>
+      <div class="tag">CODEX · 官方原版 ZIP</div>
+      <h2>Codex 桌面图形版</h2>
+      <p class="small">26.623.141536 · Intel x64 · 494.5 MB</p>
+      <a class="button" id="codex-download" href="https://persistent.oaistatic.com/codex-app-prod/Codex-darwin-x64-26.623.141536.zip">下载 Codex 原版</a>
+      <p class="small">双击 ZIP 解压，把 Codex.app 拖到 Applications（应用程序），然后打开并登录。</p>
+    </article>
+  </div>
+  <div class="note">旧合并安装包已停止自动下载。两个文件分别来自原发布方，没有重新封装或重新签名。</div>
   <details>
-    <summary>安装说明与文件校验</summary>
-    <p>Clash Verge 可导入你自己的订阅。Codex 是旧版桌面图形应用，安装后需登录；部分电脑控制等附加功能需要更高系统。</p>
-    <p>合并安装包未作 Apple Developer ID Installer 签名。若首次被系统拦截，请在 Finder 按住 Control 点按文件并选择“打开”，或在“安全性与隐私 → 通用”确认打开。</p>
-    <p>已校验原始文件、Intel 架构和主程序系统要求，尚未在目标 Mac 上实机测试。不能保证旧版在线服务和所有附加功能可用。</p>
-    <p>文件大小：592,463,796 字节。SHA256：</p>
-    <code>43d738f35254cb97612e6f88468be4b710e66b377a327ff0e09f7b60225cd2b5</code>
-    <p><a href="https://github.com/tycofficial/download/releases/tag/monterey-intel-2026-11-13">查看发布记录</a> · <a href="https://github.com/tycofficial/download">查看仓库与安装脚本</a></p>
+    <summary>首次打开、旧系统说明与校验</summary>
+    <p>原版应用首次打开时，macOS 仍可能询问是否打开从互联网下载的应用。开发者身份和公证状态以系统实际验证结果为准，原版文件不等于绝对不会弹出提示。</p>
+    <p>如果仍提示“身份不明开发者”或“无法验证开发者”，请先查看 <a href="https://support.apple.com/zh-cn/102445">Apple 官方说明</a>，核对来源与文件完整性。不要关闭整个系统的安全检查。若提示“将损坏你的电脑”或“已损坏”，请停止打开并核实具体信息。</p>
+    <p>Codex 保留适配旧系统的桌面版本；电脑操作等附加功能可能需要更高系统。尚未在你的 Monterey Mac 上实机验证，也不能保证旧版在线服务一直可用。</p>
+    <p>Clash 原版文件 SHA256：</p>
+    <code>b1d6938680f3e411b5961e56591faaa92c95e9676f54ebfdfa98b7eab374023e</code>
+    <p>Codex 原版文件 SHA256：</p>
+    <code>5a8eb9bca0c021b994e56c93ef3502bdbc105975bcb83f99aef40f2ae56d48cc</code>
+    <p><a href="https://github.com/clash-verge-rev/clash-verge-rev/releases/tag/v2.5.10">Clash 原发布页</a> · <a href="https://github.com/tycofficial/download">本站仓库</a></p>
   </details>
-  <footer>本合并安装包与 OpenAI、Clash Verge Rev 无隶属关系。程序保持原始文件，来源与许可证随包提供。</footer>
+  <footer>本站仅提供下载入口与文件镜像，与 OpenAI、Clash Verge Rev 无隶属关系。</footer>
 </main>
-<script>
-(function(){
-  var status=document.getElementById('status');
-  var button=document.getElementById('download');
-  status.textContent='下载即将开始。若浏览器没有自动下载，请点击上方按钮。';
-  window.setTimeout(function(){window.location.assign(button.href);},700);
-})();
-</script>
 </body>
 </html>

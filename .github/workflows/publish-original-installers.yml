@@ -1,0 +1,43 @@
+name: Publish original Mac installers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-original-installers.yml'
+      - 'tools/verify-originals-macos.sh'
+      - 'publish/original-manifest.json'
+      - 'publish/original-release-notes.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: original-mac-installers
+  cancel-in-progress: false
+
+jobs:
+  verify-and-publish:
+    runs-on: macos-15-intel
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Verify publisher hashes, Developer ID signatures and Gatekeeper
+        run: bash tools/verify-originals-macos.sh
+      - name: Publish untouched original installers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag='original-installers-monterey-intel-2026-11-14'
+          if ! gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title '原版独立安装文件 · Clash Verge 与 Codex · Intel Monterey' \
+              --notes-file publish/original-release-notes.md --latest
+          fi
+          gh release upload "$tag" original-installers/* --repo "$GITHUB_REPOSITORY" --clobber
+          gh release edit monterey-intel-2026-11-13 --repo "$GITHUB_REPOSITORY" \
+            --title '旧合并包（已替换，请下载原版独立文件）' --latest=false \
+            --notes '此自制合并包没有 Apple Developer ID Installer 签名，已被两个原版独立安装文件替代。请访问 https://tycofficial.github.io/download/ 下载 Clash Verge 原版 DMG 和 Codex 原版 ZIP。'
+          echo 'Original installers: https://tycofficial.github.io/download/' >> "$GITHUB_STEP_SUMMARY"

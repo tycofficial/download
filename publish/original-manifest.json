@@ -1,0 +1,17 @@
+{
+  "tag": "original-installers-monterey-intel-2026-11-14",
+  "files": [
+    {
+      "name": "Clash.Verge_2.5.10_x64.dmg",
+      "url": "https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.10/Clash.Verge_2.5.10_x64.dmg",
+      "bytes": 86532364,
+      "sha256": "b1d6938680f3e411b5961e56591faaa92c95e9676f54ebfdfa98b7eab374023e"
+    },
+    {
+      "name": "Codex-darwin-x64-26.623.141536.zip",
+      "url": "https://persistent.oaistatic.com/codex-app-prod/Codex-darwin-x64-26.623.141536.zip",
+      "bytes": 494464945,
+      "sha256": "5a8eb9bca0c021b994e56c93ef3502bdbc105975bcb83f99aef40f2ae56d48cc"
+    }
+  ]
+}

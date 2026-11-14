@@ -1,15 +1,6 @@
 name: Publish Monterey installer
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/publish-installer.yml'
-      - 'installer/**'
-      - 'tools/build-offline-pkg.mjs'
-      - 'tools/verify-offline-pkg.mjs'
-      - 'publish/**'
-      - '.gitattributes'
   workflow_dispatch:
 
 permissions:
